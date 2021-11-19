@@ -5,14 +5,25 @@ include 'functions.php';
 
 session_start();
 
+$username = "";
+$email    = "";
+$errors = array();
+$_SESSION['success'] = "";
+
 $db = mysqli_connect('localhost', 'root', 'C4!uh>oL7', 'photogallerydb');
 
-if ( isset($_POST['uname']) && isset($_GET['userid'])) {
-     
+
+// echo $_SESSION['email'];
+//echo $_SESSION['userid'];
+
+if ( $_POST ) {  //isset($_POST['submit'])
+  //$_SESSION['userid']= $_POST['uname']; 
+    
   // Data sanitization to prevent SQL injection
   $email = mysqli_real_escape_string($db, $_POST['uname']);
   $password = mysqli_real_escape_string($db, $_POST['psw']);
-
+  echo $email;
+  echo $password;
   // Error message if the input field is left blank
   if (empty($email)) {
       array_push($errors, "Username is required");
@@ -22,29 +33,35 @@ if ( isset($_POST['uname']) && isset($_GET['userid'])) {
   }
 
   // Checking for the errors
-  if (count($errors) == 0) {
+  //if (count($errors) == 0) 
+  {
        
       // Password matching
-      //$password = md5($password);
+      $password = md5($password);
        
-      $query = "SELECT * FROM users WHERE username=
+      $query = "SELECT * FROM users WHERE email=
               '$email' AND password='$password'";
       $results = mysqli_query($db, $query);
-
+      // if($results){
+      // while($row = mysqli_fetch_array($result)){
+      //   //$_SESSION['userid']= $row['userid'];
+      //   $userid = $row['userid'];
+      //   $_SESSION['userid']= $userid;
+      //   }
+      // }
       // $results = 1 means that one user with the
       // entered username exists
       if (mysqli_num_rows($results) == 1) {
            
           // Storing username in session variable
           $_SESSION['email'] = $email;
-          $_SESSION['userid'] = $row['userid'];
-           
+          //echo $_SESSION['userid']; 
           // Welcome message
           $_SESSION['success'] = "You have logged in!";
            
           // Page on which the user is sent
           // to after logging in
-          header('Location: http://localhost/photoplatform/index.php');
+          header('Location: /index.php');
       }
       else {
            
@@ -111,7 +128,7 @@ if ( isset($_POST['uname']) && isset($_GET['userid'])) {
 
 <!DOCTYPE html>
 <html>
-<head>
+<!-- <head> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -176,12 +193,12 @@ span.psw {
   }
 }
 </style>
-</head>
+<!-- </head> -->
 <body>
 
 <h2>Login Form</h2>
 
-<form action="/index.php" method="post">
+<form action="" method="post">
   <div class="imgcontainer">
     <img src="img_avatar2.png" alt="Avatar" class="avatar">
   </div>

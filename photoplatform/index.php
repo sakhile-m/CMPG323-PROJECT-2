@@ -1,17 +1,36 @@
 <?php
+session_start();
 include 'functions.php';
-// Connect to MySQL
+//include 'signup.php';
+//include 'login.php';
+echo $_SESSION['success'];
+echo $_SESSION['email'];
+//echo $_SESSION['userid'];
+$email = $_SESSION['email'];
+$db = mysqli_connect('localhost', 'root', 'C4!uh>oL7', 'photogallerydb');
+$query = "SELECT * from users WHERE email = '$email' ";
+$result = mysqli_query($db, $query);
+//$_SESSION['userid'] = $id;
+while($row = mysqli_fetch_array($result)){
+echo $row['userid'];
+$userid = $row['userid'];
+$_SESSION['userid']= $userid;
+}// Connect to MySQL
 $pdo = pdo_connect_mysql();
 // MySQL query that selects all the images
-$stmt = $pdo->query('SELECT * FROM images ORDER BY uploaded_date DESC');
-//$stmt = $pdo->query('SELECT * FROM images WHERE userid = $userid ORDER BY uploaded_date DESC');
+//$stmt = $pdo->query("SELECT * FROM images ORDER BY uploaded_date DESC");
+//$_SESSION['userid'] = $row['userid'];
+//$_SESSION['userid']=1;
+$userid = $_SESSION['userid'] ;
+
+$stmt = $pdo->query("SELECT * FROM images WHERE userid = '$userid' ORDER BY uploaded_date DESC");
 $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <?=template_header('Photo Gallery')?>
 
 <div class="content home">
-	<h2>Gallery</h2>
+	<h2>Photo Gallery</h2>
 	<p>Welcome to the gallery page! You can view the list of uploaded images below.</p>
 	<a href="upload.php" class="upload-image">Upload Image</a>
 	<div class="images">

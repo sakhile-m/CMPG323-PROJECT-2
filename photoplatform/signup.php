@@ -6,10 +6,7 @@ include 'functions.php';
 session_start();
   
 // Declaring and hoisting the variables
-$username = "";
-$email    = "";
-$errors = array();
-$_SESSION['success'] = "";
+ 
   
 // DBMS connection code -> hostname,
 // username, password, database name
@@ -50,11 +47,18 @@ if (isset($_POST['email'])) {
                   VALUES( '$email', '$password')";
          
         mysqli_query($db, $query);
+       // $result = $db->query($query);
+       // $row = $result->fetch_array(MYSQLI_BOTH);
+        //$row = mysqli_query($db, $query);
   
         // Storing username of the logged in user,
         // in the session variable
         //$_SESSION['username'] = $username;
-        $_SESSION['userid'] = $row['userid'];
+
+        //$_SESSION['userid'] = $row['userid'];
+        $id = "SELECT * from users WHERE email = '$email' ";
+        $_SESSION['userid'] = $id;
+        $_SESSION['email'] = $email;
          
         // Welcome message
         $_SESSION['success'] = "You have logged in";
