@@ -24,8 +24,8 @@ if (isset($_FILES['image'], $_POST['title'], $_POST['tags'])) {
 			// Connect to MySQL
 			$pdo = pdo_connect_mysql();
 			// Insert image info into the database (title, description, image path, and date added)
-			$stmt = $pdo->prepare('INSERT INTO images ( title, tags, geolocation, captured_by, captured_date, filepath, uploaded_date) VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)');
-	        $stmt->execute([ $_POST['title'], $_POST['tags'], $_POST['geolocation'], $_POST['captured_by'], $_POST['captured_date'], $image_path ]);
+			$stmt = $pdo->prepare('INSERT INTO images ( userid, title, tags, geolocation, captured_by, captured_date, filepath, uploaded_date) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)');
+	        $stmt->execute([$id, $_POST['title'], $_POST['tags'], $_POST['geolocation'], $_POST['captured_by'], $_POST['captured_date'], $image_path ]);
 			//$stmt = $pdo->prepare('INSERT INTO images (title, tags, filepath, uploaded_date) VALUES (?, ?, ?, CURRENT_TIMESTAMP)');
 	       // $stmt->execute([ $_POST['title'], $_POST['tags'], $image_path ]);
             $msg = 'Image uploaded successfully!';

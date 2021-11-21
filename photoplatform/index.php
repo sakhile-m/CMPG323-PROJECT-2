@@ -5,6 +5,8 @@ include 'functions.php';
 //include 'login.php';
 echo $_SESSION['success'];
 echo $_SESSION['email'];
+echo $_SESSION['message'];
+$_SESSION['message']='';
 //echo $_SESSION['userid'];
 $email = $_SESSION['email'];
 $db = mysqli_connect('localhost', 'root', 'C4!uh>oL7', 'photogallerydb');
@@ -38,7 +40,7 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		<?php if (file_exists($image['filepath'])): ?>
 		<a href="#">
 			<img src="<?=$image['filepath']?>" alt="<?=$image['tags']?>" data-id="<?=$image['id']?>" data-title="<?=$image['title']?>" width="300" height="200">
-			<span><?=$image['tags']?></span>
+			<span><?=$image['title']?></span>
 		</a>
 		<?php endif; ?>
 		<?php endforeach; ?>
@@ -63,6 +65,7 @@ document.querySelectorAll('.images a').forEach(img_link => {
 					<p>${img_meta.alt}</p>
 					<img src="${img.src}" width="${img.width}" height="${img.height}">
 					<a href="delete.php?id=${img_meta.dataset.id}" class="trash" title="Delete Image"><i class="fas fa-trash fa-xs"></i></a>
+					<a href="edit.php?id=${img_meta.dataset.id}" class="edit" title="Edit Image"><i class='fas fa-edit'></i></a>
 				</div>
 			`;
 			image_popup.style.display = 'flex';

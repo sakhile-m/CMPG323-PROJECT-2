@@ -203,3 +203,9 @@ body {
 .delete .yesno a:hover {
     background-color: #32a367;
 }
+.edit form label {
+    display: inline-flex;
+    width: 100%;
+    padding: 10px 0;
+    margin-right: 25px;
+}
