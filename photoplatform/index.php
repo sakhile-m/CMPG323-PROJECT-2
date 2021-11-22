@@ -3,18 +3,18 @@ session_start();
 include 'functions.php';
 //include 'signup.php';
 //include 'login.php';
-echo $_SESSION['success'];
-echo $_SESSION['email'];
+//echo $_SESSION['success'];
+//echo $_SESSION['email'];
 echo $_SESSION['message'];
 $_SESSION['message']='';
 //echo $_SESSION['userid'];
 $email = $_SESSION['email'];
-$db = mysqli_connect('localhost', 'root', 'C4!uh>oL7', 'photogallerydb');
+$db = mysqli_connect('127.0.0.1', 'root', 'C4!uh>oL7', 'photogallerydb');
 $query = "SELECT * from users WHERE email = '$email' ";
 $result = mysqli_query($db, $query);
 //$_SESSION['userid'] = $id;
 while($row = mysqli_fetch_array($result)){
-echo $row['userid'];
+//echo $row['userid'];
 $userid = $row['userid'];
 $_SESSION['userid']= $userid;
 }// Connect to MySQL
@@ -49,9 +49,9 @@ $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="image-popup"></div>
 
 <script>
-// Container we'll use to output the image
+
 let image_popup = document.querySelector('.image-popup');
-// Iterate the images and apply the onclick event to each individual image
+
 document.querySelectorAll('.images a').forEach(img_link => {
 	img_link.onclick = e => {
 		e.preventDefault();

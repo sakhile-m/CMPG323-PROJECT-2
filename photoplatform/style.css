@@ -209,3 +209,9 @@ body {
     padding: 10px 0;
     margin-right: 25px;
 }
+.edit form {
+    padding: 15px 0;
+    display: flex;
+    flex-flow: column;
+    width: 400px;
+}

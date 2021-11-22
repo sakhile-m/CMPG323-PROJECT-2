@@ -1,6 +1,6 @@
 <?php
 function pdo_connect_mysql() {
-    // The below variables should reflect your MySQL credentials
+    
     $DATABASE_HOST = 'localhost';
     $DATABASE_USER = 'root';
     $DATABASE_PASS = 'C4!uh>oL7';

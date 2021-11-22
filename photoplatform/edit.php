@@ -1,10 +1,10 @@
 <?php
 include 'functions.php';
 session_start();
-echo $_SESSION['id'];
+//echo $_SESSION['id'];
 $userid = $_SESSION['userid'];
 //$id = $_GET['id'];
-echo $_GET['id'];
+//echo $_GET['id'];
 
 //$pdo = pdo_connect_mysql();
 $db = mysqli_connect('localhost', 'root', 'C4!uh>oL7', 'photogallerydb');

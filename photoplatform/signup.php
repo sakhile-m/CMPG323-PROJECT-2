@@ -37,7 +37,8 @@ if (isset($_POST['email'])) {
     }
   
     // If the form is error free, then register the user
-    if (count($errors) == 0) {
+    //if (count($errors) == 0) 
+    {
          
         // Password encryption to increase data security
         $password = md5($password_1);
